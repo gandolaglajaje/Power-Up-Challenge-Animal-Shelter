@@ -1,0 +1,10 @@
+cr399_locationname: |-
+    =Switch(
+        pu_currentlocation,
+        "S-01", "Hooves Haven Rescue Clinic",
+        "S-02", "Companion Critter Retreat",
+        "S-03", "Pawsitive Steps Shelter",
+        "S-04", "Happy Tails Haven",
+        "S-05", "Loving Paws Shelter",
+        ""  // Default value if no match is found
+    )

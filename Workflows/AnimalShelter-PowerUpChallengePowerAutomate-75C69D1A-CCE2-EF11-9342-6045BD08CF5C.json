@@ -1,0 +1,81 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "pu_sharedcommondataserviceforapps_d0164"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_gmail": {
+        "api": {
+          "name": "shared_gmail"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "pu_sharedgmail_4259d"
+        },
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "When_a_row_is_added,_modified_or_deleted": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "subscriptionRequest/message": 7,
+              "subscriptionRequest/entityname": "pu_animaltablefinal",
+              "subscriptionRequest/scope": 4
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "connectionName": "shared_commondataserviceforapps"
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "0cfa77bd-b147-4e23-9435-84113d7bb4fe"
+          }
+        }
+      },
+      "actions": {
+        "Send_email_(V2)": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "emailMessage/To": "glajajegandola@gmail.com",
+              "emailMessage/Subject": "Foster Animal Pickup Details",
+              "emailMessage/Body": "<p class=\"editor-paragraph\">Dear @{triggerOutputs()?['body/pu_fosterclaimer']},<br><br>Thank you for fostering @{triggerOutputs()?['body/pu_animalname']} from @{triggerOutputs()?['body/cr399_locationname']}. Below are the details of the animal and the pickup schedule:<br><br>Animal Name: @{triggerOutputs()?['body/pu_animalname']}<br>Animal Type: @{triggerOutputs()?['body/pu_animaltype']}<br>Age: @{triggerOutputs()?['body/pu_age']}<br>Health/Medical Notes: @{triggerOutputs()?['body/pu_medicalconditions']}<br>Pickup Date &amp; Time: @{triggerOutputs()?['body/pu_dateoffoster']}</p><p class=\"editor-paragraph\"><b><strong class=\"editor-text-bold\">Next Steps</strong></b> for Foster Parents:<br>1. <b><strong class=\"editor-text-bold\">Confirm Pickup:</strong></b> Reply to this email to confirm your availability.<br>2. <b><strong class=\"editor-text-bold\">Prepare Your Home: </strong></b>Ensure you have ready food, bedding, and other essentials.<br>3. <b><strong class=\"editor-text-bold\">Bring a Carrier or Leash:</strong></b> For safe transport of the animal.<br>4. <b><strong class=\"editor-text-bold\">Follow Health Guidelines</strong></b>: Review the provided instructions if the pet has medical needs.<br>5. <b><strong class=\"editor-text-bold\">Check-In with Us:</strong></b> We’ll schedule a follow-up to check on the pet’s adjustment.</p><p class=\"editor-paragraph\"><br>Please confirm your availability or let us know if you need to reschedule. Feel free to reach out if you have any questions.</p><br><p class=\"editor-paragraph\"><br>Best regards,<br><i><b><strong class=\"editor-text-bold editor-text-italic\">Paw &amp; Heart Animal Rescue</strong></b></i></p><br>"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_gmail",
+              "operationId": "SendEmailV2",
+              "connectionName": "shared_gmail"
+            }
+          },
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "2fc0fcdb-085f-4bb8-87fa-115fcb51a9f0"
+          }
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}
