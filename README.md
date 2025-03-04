@@ -8,6 +8,12 @@ This challenge was developed as part of the **Microsoft Power Up Challenge** in 
 - **Adoption Tracking**: Manage adoption and medical approvals for animals.
 - **Reports & Analytics**: Gain insights into animal information trends.
 - **Automated Notifications**: Send emails to foster families.
+  
+## Canvas App
+![image](https://github.com/user-attachments/assets/8b8b477a-33aa-4207-b97c-1763f2490a98)
+
+## Model-Driven App
+![image](https://github.com/user-attachments/assets/f189953d-0d08-4036-8580-1bb64d7b8f08)
 
 ## Tech Stack
 - **Power Apps** (User Interface & Forms)
