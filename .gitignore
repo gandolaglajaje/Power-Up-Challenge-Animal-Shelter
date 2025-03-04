@@ -4,4 +4,6 @@ CanvasApps/
 
 # Ignore specific files
 solution.xml
+cuscustomizations.xml
+[Content_Types].xml
 Power Up - Power Bi.pbix
